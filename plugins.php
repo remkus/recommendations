@@ -65,50 +65,50 @@ class HideTrackLinks {
 	function register_cpt_hidetracklinks() {
 
 		$labels = array(
-			'name'      			=> _x( 'Hide and Track Links', 'hidetracklinks' ),
-			'singular_name'   		=> _x( 'Hide and Track link', 'hidetracklinks' ),
-			'add_new'     			=> _x( 'Add New Link', 'hidetracklinks' ),
-			'add_new_item'    		=> _x( 'Add New Hide and Track link', 'hidetracklinks' ),
-			'edit_item'    			=> _x( 'Edit Hide and Track link', 'hidetracklinks' ),
-			'new_item'     			=> _x( 'New Hide and Track link', 'hidetracklinks' ),
-			'view_item'    			=> _x( 'View Hide and Track link', 'hidetracklinks' ),
-			'search_items'    		=> _x( 'Search Hide and Track Links', 'hidetracklinks' ),
-			'not_found'    			=> _x( 'No hide and track links found', 'hidetracklinks' ),
-			'not_found_in_trash'  	=> _x( 'No hide and track links found in Trash', 'hidetracklinks' ),
-			'parent_item_colon'  	=> _x( 'Parent Hide and Track link:', 'hidetracklinks' ),
-			'menu_name'    			=> _x( 'Hide and Track Links', 'hidetracklinks' ),
+			'name'					=> _x( 'Hide and Track Links', 'hidetracklinks' ),
+			'singular_name'			=> _x( 'Hide and Track link', 'hidetracklinks' ),
+			'add_new'				=> _x( 'Add New Link', 'hidetracklinks' ),
+			'add_new_item'			=> _x( 'Add New Hide and Track link', 'hidetracklinks' ),
+			'edit_item'				=> _x( 'Edit Hide and Track link', 'hidetracklinks' ),
+			'new_item'				=> _x( 'New Hide and Track link', 'hidetracklinks' ),
+			'view_item'				=> _x( 'View Hide and Track link', 'hidetracklinks' ),
+			'search_items'			=> _x( 'Search Hide and Track Links', 'hidetracklinks' ),
+			'not_found'				=> _x( 'No hide and track links found', 'hidetracklinks' ),
+			'not_found_in_trash'	=> _x( 'No hide and track links found in Trash', 'hidetracklinks' ),
+			'parent_item_colon'		=> _x( 'Parent Hide and Track link:', 'hidetracklinks' ),
+			'menu_name'				=> _x( 'Hide and Track Links', 'hidetracklinks' ),
 		);
 
 		$args = array(
-			'labels'     			=> $labels,
-			'hierarchical'    		=> false,
-			'description'    		=> 'Hide and Track Links post type',
-			'supports'     			=> array(
+			'labels'				=> $labels,
+			'hierarchical'			=> false,
+			'description'			=> 'Hide and Track Links post type',
+			'supports'				=> array(
 				'title',
 				'revisions'
 			),
-			'taxonomies'    		=> array(
+			'taxonomies'			=> array(
 				'provider',
 				'genre'
 			),
-			'public'     			=> true,
-			'show_ui'     			=> true,
-			'show_in_menu'    		=> true,
-			'menu_position'   		=> 88.11,
-			'menu_icon'    			=> 'the_url',
-			'show_in_nav_menus'  	=> true,
-			'publicly_queryable'  	=> true,
-			'exclude_from_search'  	=> false,
-			'has_archive'    		=> false,
-			'query_var'    			=> true,
+			'public'				=> true,
+			'show_ui'				=> true,
+			'show_in_menu'			=> true,
+			'menu_position'			=> 88.11,
+			'menu_icon'				=> 'the_url',
+			'show_in_nav_menus'		=> true,
+			'publicly_queryable'	=> true,
+			'exclude_from_search'	=> false,
+			'has_archive'			=> false,
+			'query_var'				=> true,
 			'can_export'			=> true,
-			'rewrite'     			=> array(
-				'slug'    		=> 'out',
-				'with_front'  	=> false,
-				'feeds'   		=> true,
-				'pages'   		=> false
+			'rewrite'				=> array(
+				'slug'				=> 'out',
+				'with_front'		=> false,
+				'feeds'				=> true,
+				'pages'				=> false
 			),
-			'capability_type'  => 'post'
+			'capability_type'		=> 'post'
 		);
 
 		register_post_type( 'hidetracklinks', $args );
