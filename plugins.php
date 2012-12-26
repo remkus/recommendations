@@ -125,7 +125,7 @@ class HideTrackLinks {
 			'show_ui'             => true,
 			'show_in_menu'        => true,
 			'menu_position'       => 88.11,
-			'menu_icon'		      => 'the_url',
+			'menu_icon'           => 'the_url',
 			'show_in_nav_menus'   => true,
 			'publicly_queryable'  => true,
 			'exclude_from_search' => false,
@@ -178,7 +178,7 @@ class HideTrackLinks {
 			'show_tagcloud'     => false,
 			'hierarchical'      => false,
 			'rewrite'           => false,
-			'query_var'         => true
+			'query_var'         => true,
 		);
 
 		register_taxonomy( $this->providers, array( $this->cpt ), $args );
@@ -216,7 +216,7 @@ class HideTrackLinks {
 			'show_tagcloud'     => false,
 			'hierarchical'      => false,
 			'rewrite'           => false,
-			'query_var'         => true
+			'query_var'         => true,
 		);
 
 		register_taxonomy( $this->genre, array( $this->cpt ), $args );
@@ -234,7 +234,7 @@ class HideTrackLinks {
 			'title'     => _x( 'Title', 'Column heading', 'hidetracklinks' ),
 			'url'       => _x( 'Redirect to', 'Column heading', 'hidetracklinks' ),
 			'permalink' => _x( 'Permalink', 'Column heading', 'hidetracklinks' ),
-			'clicks'    => _x( 'Clicks', 'Column heading', 'hidetracklinks' )
+			'clicks'    => _x( 'Clicks', 'Column heading', 'hidetracklinks' ),
 		);
 	}
 
