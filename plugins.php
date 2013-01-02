@@ -9,9 +9,9 @@
  * @author Gary Jones
  * 
  * @wordpress-plugin
- * Plugin Name: Redirect Outbound Links
- * Plugin URI: http://remkusdevries.com/plugins/redirect-outbound-inks
- * Description: Redirect Outbound Links is a complete URL management system that allows you create, manage, and track outbound links from your site by using custom post types and 301 redirects.
+ * Plugin Name: HideAndTrackLinks
+ * Plugin URI: http://remkusdevries.com/plugins/hide-track-links
+ * Description: The Hide and Track Links plugin is a complete URL management system that allows you create, manage, and track outbound links from your site by using custom post types and 301 redirects.
  * Version: 0.2.0
  * Author: Remkus de Vries
  * Author URI: http://remkusdevries.com/
