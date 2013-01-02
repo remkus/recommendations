@@ -1,13 +1,13 @@
 <?php
 /**
  * Hide and Track Links plugin.
- * 
+ *
  * This is a complete URL management system that allows you create, manage, and track outbound links from your site by using custom post types and 301 redirects.
- * 
+ *
  * @package HideAndTrackLinks
  * @author Remkus de Vries
  * @author Gary Jones
- * 
+ *
  * @wordpress-plugin
  * Plugin Name: HideAndTrackLinks
  * Plugin URI: http://remkusdevries.com/plugins/hide-track-links
@@ -16,24 +16,24 @@
  * Author: Remkus de Vries
  * Author URI: http://remkusdevries.com/
  * License: GPL-2.0+
-
-  Copyright Nathan Rice from his SimpleURLs plugin as a basis.
-
-  Copyright 2012 (remkus@forsite.nu).
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License, version 2, as
-  published by the Free Software Foundation.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
+ *
+ * Copyright Nathan Rice from his SimpleURLs plugin as a basis.
+ *
+ * Copyright 2012 (remkus@forsite.nu).
+ *
+ * This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License, version 2, as
+ *  published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ *
 */
 
 /**
@@ -45,29 +45,29 @@
  */
 class HideTrackLinks {
 	/** @var Plugin slug. */
-	public $slug = 'redirect_outbound_links';
-	
+	public $slug = 'hide_track_links';
+
 	/** @var Meta key for storing redirection. */
 	public $key = '_hidetracklinks_redirect';
-	
+
 	/** @var Meta key for storing redirection counter. */
 	public $counter_key = '_hidetracklinks_count';
-	
+
 	/** @var Name of the custom post type. */
 	public $cpt = 'hidetracklinks';
-	
+
 	/** @var Name of the providers taxonomy. */
 	public $providers = 'providers';
-	
+
 	/** @var Name of the genre taxonomy. */
 	public $genre = 'genre';
-	
+
 	/** @var Name of the nonce. */
 	public $nonce_name = '_hidetracklinks_nonce';
 
 	/**
 	 * Initialise and integrate plugin.
-	 * 
+	 *
 	 * @since 0.2.0
 	 */
 	public function run() {
@@ -85,7 +85,7 @@ class HideTrackLinks {
 
 	/**
 	 * Set up localization.
-	 * 
+	 *
 	 * @since 0.1.0
 	 */
 	public function localization() {
@@ -264,7 +264,7 @@ class HideTrackLinks {
 
 	/**
 	 * Register meta box for display on custom post type editing.
-	 * 
+	 *
 	 * @since 0.1.0
 	 */
 	public function add_meta_box() {
@@ -273,7 +273,7 @@ class HideTrackLinks {
 
 	/**
 	 * Populate meta box.
-	 * 
+	 *
 	 * @since 0.1.0
 	 */
 	public function meta_box() {
@@ -282,7 +282,7 @@ class HideTrackLinks {
 		printf( '<input type="hidden" name="%s" value="%s" />', esc_attr( $this->nonce_name ), wp_create_nonce( plugin_basename( __FILE__ ) ) );
 
 		printf( '<p><label for="%s">%s</label></p>', esc_attr( $this->key ), __( 'Redirect URI', 'hidetracklinks' ) );
-		printf( '<p><input type="text" name="%s" id="%s" value="%s" style="%s" /></p>', esc_attr( 'width: 99%;' ), esc_attr( $this->key ), esc_attr( $this->key ), esc_attr( get_post_meta( $post->ID, $this->key, true ) ) );
+		printf( '<p><input type="text" name="%s" id="%s" value="%s" style="%s" /></p>', esc_attr( $this->key ), esc_attr( $this->key ), esc_attr( get_post_meta( $post->ID, $this->key, true ) ), esc_attr( 'width: 99%;' ) );
 
 		$count = isset( $post->ID ) ? get_post_meta( $post->ID, $this->counter_key, true ) : 0;
 		printf( '<p>This URL has been accessed <b>%d</b> times.</p>', $count );
@@ -290,7 +290,7 @@ class HideTrackLinks {
 
 	/**
 	 * Save meta box input values.
-	 * 
+	 *
 	 * @since 0.1.0
 	 *
 	 * @param int    $post_id Post ID to save meta data for.
@@ -326,9 +326,9 @@ class HideTrackLinks {
 
 	/**
 	 * Increase counter and perform redirect when single link is accessed.
-	 * 
+	 *
 	 * @since 0.1.0
-	 * 
+	 *
 	 * @return null Return early and do nothing if not a single hide and track link.
 	 */
 	public function count_and_redirect() {
@@ -343,6 +343,7 @@ class HideTrackLinks {
 
 		// Handle the redirect
 		$redirect = isset( $wp_query->post->ID ) ? get_post_meta( $wp_query->post->ID, $this->key, true ) : '';
+
 
 		if ( ! empty( $redirect ) ) {
 			wp_redirect( esc_url_raw( $redirect ), 301 );
