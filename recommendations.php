@@ -1,25 +1,25 @@
 <?php
 /**
- * Hide and Track Links plugin.
+ * Recommendations plugin.
  *
  * This is a complete URL management system that allows you create, manage, and track outbound links from your site by using custom post types and 301 redirects.
  *
- * @package HideAndTrackLinks
+ * @package Recommendations
  * @author Remkus de Vries
  * @author Gary Jones
  *
  * @wordpress-plugin
- * Plugin Name: HideAndTrackLinks
- * Plugin URI: http://remkusdevries.com/plugins/hide-track-links
- * Description: The Hide and Track Links plugin is a complete URL management system that allows you create, manage, and track outbound links from your site by using custom post types and 301 redirects.
- * Version: 0.2.0
+ * Plugin Name: Recommendations
+ * Plugin URI: http://remkusdevries.com/plugins/recommendations/
+ * Description: The Recommendations plugin is a complete URL management system that allows you create, manage, and track outbound links from your site by using custom post types and 301 redirects.
+ * Version: 0.3.0
  * Author: Remkus de Vries
- * Author URI: http://remkusdevries.com/
+ * Author URI: https://remkusdevries.com/
  * License: GPL-2.0+
  *
  * Copyright Nathan Rice from his SimpleURLs plugin as a basis.
  *
- * Copyright 2012 (remkus@forsite.nu).
+ * Copyright 2012 (remkus@forsite.media).
  *
  * This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License, version 2, as
@@ -37,24 +37,24 @@
 */
 
 /**
- * Hide and Track Links plugin, main class.
+ * Recommendations plugin, main class.
  *
- * @package HideAndTrackLinks
+ * @package Recommendations
  * @author Remkus de Vries
  * @author Gary Jones
  */
-class HideTrackLinks {
+class recommendations {
 	/** @var Plugin slug. */
-	public $slug = 'hide_track_links';
+	public $slug = 'recommendations';
 
 	/** @var Meta key for storing redirection. */
-	public $key = '_hidetracklinks_redirect';
+	public $key = '_recommendations_redirect';
 
 	/** @var Meta key for storing redirection counter. */
-	public $counter_key = '_hidetracklinks_count';
+	public $counter_key = '_recommendations_count';
 
 	/** @var Name of the custom post type. */
-	public $cpt = 'hidetracklinks';
+	public $cpt = 'recommends';
 
 	/** @var Name of the providers taxonomy. */
 	public $providers = 'providers';
@@ -63,7 +63,7 @@ class HideTrackLinks {
 	public $genre = 'genre';
 
 	/** @var Name of the nonce. */
-	public $nonce_name = '_hidetracklinks_nonce';
+	public $nonce_name = '_recommendations_nonce';
 
 	/**
 	 * Initialise and integrate plugin.
@@ -73,11 +73,11 @@ class HideTrackLinks {
 	public function run() {
 		//register_activation_hook( __FILE__, 'flush_rewrite_rules' );
 		add_action( 'init', array( $this, 'localization' ) );
-		add_action( 'init', array( $this, 'register_cpt_hidetracklinks' ) );
+		add_action( 'init', array( $this, 'register_cpt_recommendations' ) );
 		add_action( 'init', array( $this, 'register_taxonomy_genre' ) );
 		add_action( 'init', array( $this, 'register_taxonomy_providers' ) );
 		add_action( 'manage_posts_custom_column', array( $this, 'columns_data' ) );
-		add_filter( 'manage_edit-hidetracklinks_columns', array( $this, 'columns_filter' ) );
+		add_filter( 'manage_edit-recommendations_columns', array( $this, 'columns_filter' ) );
 		add_action( 'admin_menu', array( $this, 'add_meta_box' ) );
 		add_action( 'save_post', array( $this, 'meta_box_save' ), 1, 2 );
 		add_action( 'template_redirect', array( $this, 'count_and_redirect' ) );
@@ -97,26 +97,26 @@ class HideTrackLinks {
 	 *
 	 * @since 0.1.0
 	 */
-	public function register_cpt_hidetracklinks() {
+	public function register_cpt_recommendations() {
 		$labels = array(
-			'name'               => _x( 'Hide and Track Links', 'hidetracklinks' ),
-			'singular_name'      => _x( 'Hide and Track link', 'hidetracklinks' ),
-			'add_new'            => _x( 'Add New Link', 'hidetracklinks' ),
-			'add_new_item'       => _x( 'Add New Hide and Track link', 'hidetracklinks' ),
-			'edit_item'          => _x( 'Edit Hide and Track link', 'hidetracklinks' ),
-			'new_item'           => _x( 'New Hide and Track link', 'hidetracklinks' ),
-			'view_item'          => _x( 'View Hide and Track link', 'hidetracklinks' ),
-			'search_items'       => _x( 'Search Hide and Track Links', 'hidetracklinks' ),
-			'not_found'          => _x( 'No hide and track links found', 'hidetracklinks' ),
-			'not_found_in_trash' => _x( 'No hide and track links found in Trash', 'hidetracklinks' ),
-			'parent_item_colon'  => _x( 'Parent Hide and Track link:', 'hidetracklinks' ),
-			'menu_name'          => _x( 'Hide and Track Links', 'hidetracklinks' ),
+			'name'               => _x( 'Recommended Links', 'recommendations' ),
+			'singular_name'      => _x( 'Recommended link', 'recommendations' ),
+			'add_new'            => _x( 'Add New Link', 'recommendations' ),
+			'add_new_item'       => _x( 'Add New Recommended link', 'recommendations' ),
+			'edit_item'          => _x( 'Edit Recommended link', 'recommendations' ),
+			'new_item'           => _x( 'New Recommended link', 'recommendations' ),
+			'view_item'          => _x( 'View Recommended link', 'recommendations' ),
+			'search_items'       => _x( 'Search Recommended Links', 'recommendations' ),
+			'not_found'          => _x( 'No Recommended links found', 'recommendations' ),
+			'not_found_in_trash' => _x( 'No Recommended links found in Trash', 'recommendations' ),
+			'parent_item_colon'  => _x( 'Parent Recommended link:', 'recommendations' ),
+			'menu_name'          => _x( 'Recommends', 'recommendations' ),
 		);
 
 		$args = array(
 			'labels'              => $labels,
 			'hierarchical'        => false,
-			'description'         => __( 'Hide and Track Links post type', 'hidetracklinks' ),
+			'description'         => __( 'Recommendations Links post type', 'recommendations' ),
 			'supports'            => array(
 				'title',
 				'revisions',
@@ -125,7 +125,7 @@ class HideTrackLinks {
 			'show_ui'             => true,
 			'show_in_menu'        => true,
 			'menu_position'       => 88.11,
-			'menu_icon'           => 'the_url',
+			'menu_icon'           => 'dashicons-thumbs-up',
 			'show_in_nav_menus'   => true,
 			'publicly_queryable'  => true,
 			'exclude_from_search' => false,
@@ -133,7 +133,7 @@ class HideTrackLinks {
 			'query_var'           => true,
 			'can_export'          => true,
 			'rewrite'             => array(
-				'slug'       => 'out',
+				'slug'       => 'recommends',
 				'with_front' => false,
 				'feeds'      => true,
 				'pages'      => false
@@ -153,21 +153,21 @@ class HideTrackLinks {
 	public function register_taxonomy_providers() {
 
 		$labels = array(
-			'name'                       => _x( 'Providers', 'hidetracklinks' ),
-			'singular_name'              => _x( 'Provider', 'hidetracklinks' ),
-			'search_items'               => _x( 'Search Providers', 'hidetracklinks' ),
-			'popular_items'              => _x( 'Popular Providers', 'hidetracklinks' ),
-			'all_items'                  => _x( 'All Providers', 'hidetracklinks' ),
-			'parent_item'                => _x( 'Parent Provider', 'hidetracklinks' ),
-			'parent_item_colon'          => _x( 'Parent Provider:', 'hidetracklinks' ),
-			'edit_item'                  => _x( 'Edit Provider', 'hidetracklinks' ),
-			'update_item'                => _x( 'Update Provider', 'hidetracklinks' ),
-			'add_new_item'               => _x( 'Add New Provider', 'hidetracklinks' ),
-			'new_item_name'              => _x( 'New Provider', 'hidetracklinks' ),
-			'separate_items_with_commas' => _x( 'Separate providers with commas', 'hidetracklinks' ),
-			'add_or_remove_items'        => _x( 'Add or remove Providers', 'hidetracklinks' ),
-			'choose_from_most_used'      => _x( 'Choose from most used Providers', 'hidetracklinks' ),
-			'menu_name'                  => _x( 'Providers', 'hidetracklinks' ),
+			'name'                       => _x( 'Providers', 'recommendations' ),
+			'singular_name'              => _x( 'Provider', 'recommendations' ),
+			'search_items'               => _x( 'Search Providers', 'recommendations' ),
+			'popular_items'              => _x( 'Popular Providers', 'recommendations' ),
+			'all_items'                  => _x( 'All Providers', 'recommendations' ),
+			'parent_item'                => _x( 'Parent Provider', 'recommendations' ),
+			'parent_item_colon'          => _x( 'Parent Provider:', 'recommendations' ),
+			'edit_item'                  => _x( 'Edit Provider', 'recommendations' ),
+			'update_item'                => _x( 'Update Provider', 'recommendations' ),
+			'add_new_item'               => _x( 'Add New Provider', 'recommendations' ),
+			'new_item_name'              => _x( 'New Provider', 'recommendations' ),
+			'separate_items_with_commas' => _x( 'Separate providers with commas', 'recommendations' ),
+			'add_or_remove_items'        => _x( 'Add or remove Providers', 'recommendations' ),
+			'choose_from_most_used'      => _x( 'Choose from most used Providers', 'recommendations' ),
+			'menu_name'                  => _x( 'Providers', 'recommendations' ),
 		);
 
 		$args = array(
@@ -191,21 +191,21 @@ class HideTrackLinks {
 	 */
 	public function register_taxonomy_genre() {
 		$labels = array(
-			'name'                       => _x( 'Genre', 'hidetracklinks' ),
-			'singular_name'              => _x( 'Genre', 'hidetracklinks' ),
-			'search_items'               => _x( 'Search Genres', 'hidetracklinks' ),
-			'popular_items'              => _x( 'Popular Genre', 'hidetracklinks' ),
-			'all_items'                  => _x( 'All Genres', 'hidetracklinks' ),
-			'parent_item'                => _x( 'Parent Genre', 'hidetracklinks' ),
-			'parent_item_colon'          => _x( 'Parent Genre:', 'hidetracklinks' ),
-			'edit_item'                  => _x( 'Edit Genre', 'hidetracklinks' ),
-			'update_item'                => _x( 'Update Genre', 'hidetracklinks' ),
-			'add_new_item'               => _x( 'Add New Genre', 'hidetracklinks' ),
-			'new_item_name'              => _x( 'New Genre', 'hidetracklinks' ),
-			'separate_items_with_commas' => _x( 'Separate genre with commas', 'hidetracklinks' ),
-			'add_or_remove_items'        => _x( 'Add or remove Genres', 'hidetracklinks' ),
-			'choose_from_most_used'      => _x( 'Choose from most used Genres', 'hidetracklinks' ),
-			'menu_name'                  => _x( 'Genre', 'hidetracklinks' ),
+			'name'                       => _x( 'Genre', 'recommendations' ),
+			'singular_name'              => _x( 'Genre', 'recommendations' ),
+			'search_items'               => _x( 'Search Genres', 'recommendations' ),
+			'popular_items'              => _x( 'Popular Genre', 'recommendations' ),
+			'all_items'                  => _x( 'All Genres', 'recommendations' ),
+			'parent_item'                => _x( 'Parent Genre', 'recommendations' ),
+			'parent_item_colon'          => _x( 'Parent Genre:', 'recommendations' ),
+			'edit_item'                  => _x( 'Edit Genre', 'recommendations' ),
+			'update_item'                => _x( 'Update Genre', 'recommendations' ),
+			'add_new_item'               => _x( 'Add New Genre', 'recommendations' ),
+			'new_item_name'              => _x( 'New Genre', 'recommendations' ),
+			'separate_items_with_commas' => _x( 'Separate genre with commas', 'recommendations' ),
+			'add_or_remove_items'        => _x( 'Add or remove Genres', 'recommendations' ),
+			'choose_from_most_used'      => _x( 'Choose from most used Genres', 'recommendations' ),
+			'menu_name'                  => _x( 'Genre', 'recommendations' ),
 		);
 
 		$args = array(
@@ -231,10 +231,10 @@ class HideTrackLinks {
 	public function columns_filter( $columns ) {
 		return array(
 			'cb'        => '<input type="checkbox" />',
-			'title'     => _x( 'Title', 'Column heading', 'hidetracklinks' ),
-			'url'       => _x( 'Redirect to', 'Column heading', 'hidetracklinks' ),
-			'permalink' => _x( 'Permalink', 'Column heading', 'hidetracklinks' ),
-			'clicks'    => _x( 'Clicks', 'Column heading', 'hidetracklinks' ),
+			'title'     => _x( 'Title', 'Column heading', 'recommendations' ),
+			'url'       => _x( 'Redirect to', 'Column heading', 'recommendations' ),
+			'permalink' => _x( 'Permalink', 'Column heading', 'recommendations' ),
+			'clicks'    => _x( 'Clicks', 'Column heading', 'recommendations' ),
 		);
 	}
 
@@ -268,7 +268,7 @@ class HideTrackLinks {
 	 * @since 0.1.0
 	 */
 	public function add_meta_box() {
-		add_meta_box( 'hidetracklinks', __( 'URL Information', 'hidetracklinks' ), array( &$this, 'meta_box' ), $this->cpt, 'normal', 'high' );
+		add_meta_box( 'recommendations', __( 'URL Information', 'recommendations' ), array( &$this, 'meta_box' ), $this->cpt, 'normal', 'high' );
 	}
 
 	/**
@@ -281,7 +281,7 @@ class HideTrackLinks {
 
 		printf( '<input type="hidden" name="%s" value="%s" />', esc_attr( $this->nonce_name ), wp_create_nonce( plugin_basename( __FILE__ ) ) );
 
-		printf( '<p><label for="%s">%s</label></p>', esc_attr( $this->key ), __( 'Redirect URI', 'hidetracklinks' ) );
+		printf( '<p><label for="%s">%s</label></p>', esc_attr( $this->key ), __( 'Redirect URI', 'recommendations' ) );
 		printf( '<p><input type="text" name="%s" id="%s" value="%s" style="%s" /></p>', esc_attr( $this->key ), esc_attr( $this->key ), esc_attr( get_post_meta( $post->ID, $this->key, true ) ), esc_attr( 'width: 99%;' ) );
 
 		$count = isset( $post->ID ) ? get_post_meta( $post->ID, $this->counter_key, true ) : 0;
@@ -355,5 +355,5 @@ class HideTrackLinks {
 	}
 }
 
-$hideTrackLinks = new HideTrackLinks;
-$hideTrackLinks->run();
+$recommendations = new recommendations;
+$recommendations->run();
