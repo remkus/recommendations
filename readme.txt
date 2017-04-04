@@ -9,9 +9,7 @@ Stable tag: 0.3.3
 
 == Description ==
 
-This is a complete URL management system that allows you create, manage,
-and track outbound links from your site by using a custom post types and
-301 redirects.
+This is a complete URL management system that allows you create, manage, and track outbound links from your site by using a custom post types and 301 redirects.
 
 == Installation ==
 
@@ -28,9 +26,7 @@ Or search for "Recommendations" via your plugins menu.
 === Can I make a suggestion? ===
 
 You most certainly can. [Please contact
-me](https://remkusdevries.com/contact/ "Please contact me") or
-[Twitter](http://twitter.com/DeFries "My Twitter Account") and I'll see
-what I can do.
+me](https://remkusdevries.com/contact/ "Please contact me") or [Twitter](http://twitter.com/DeFries "My Twitter Account") and I'll see what I can do.
 
 == Screenshots ==
 
