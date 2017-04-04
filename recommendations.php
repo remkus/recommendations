@@ -8,11 +8,10 @@
  * @author Remkus de Vries
  * @author Gary Jones
  *
- * @wordpress-plugin
  * Plugin Name: Recommendations
  * Plugin URI: http://remkusdevries.com/plugins/recommendations/
  * Description: The Recommendations plugin is a complete URL management system that allows you create, manage, and track outbound links from your site by using custom post types and 301 redirects.
- * Version: 0.3.0
+ * Version: 0.3.1
  * Author: Remkus de Vries
  * Author URI: https://remkusdevries.com/
  * License: GPL-2.0+
