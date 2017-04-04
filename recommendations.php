@@ -82,6 +82,7 @@ class recommendations {
 		add_action( 'template_redirect', array( $this, 'count_and_redirect' ) );
 		add_action( 'add_meta_boxes', array( $this, 'remove_yoast_metabox' ) , 11 );
 		add_filter( 'manage_edit-recommends_columns', array( $this, 'remove_yoast_seo_list_columns' ) );
+		add_filter( 'rest_api_allowed_post_types', array( $this, 'allow_post_type_wpcom' ) );
 	}
 
 	/**
@@ -377,6 +378,17 @@ class recommendations {
 		unset( $columns['wpseo-focuskw'] );
 		return $columns;
 	}  
+
+	/**
+ 	 * Filter the list of Post Types available in the WordPress.com REST API.
+	 *
+	 * @param array $allowed_post_types Array of whitelisted Post Types.
+	 * @return array $allowed_post_types Array of whitelisted Post Types, including our 'recommends' Custom Post Type.
+	 */
+	public function allow_post_type_wpcom( $allowed_post_types ) {
+		$allowed_post_types[] = 'recommends';
+    	return $allowed_post_types;
+	}
 
 }
 
