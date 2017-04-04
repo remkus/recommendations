@@ -10,8 +10,8 @@
  *
  * Plugin Name: Recommendations
  * Plugin URI: http://remkusdevries.com/plugins/recommendations/
- * Description: The Recommendations plugin is a complete URL management system that allows you create, manage, and track outbound links from your site by using custom post types and 301 redirects.
- * Version: 0.3.1
+ * Description: Complete URL management system that allows you create, manage, and track outbound links from your site via 301 redirects.
+ * Version: 0.3.2
  * Author: Remkus de Vries
  * Author URI: https://remkusdevries.com/
  * License: GPL-2.0+
@@ -357,6 +357,7 @@ class recommendations {
 
 	/**
 	 * Remove Yoast SEO metaboxes
+	 * @since  0.3.2
 	 * @return [type] [description]
 	 */
 	public function remove_yoast_metabox() {
@@ -365,6 +366,7 @@ class recommendations {
 
 	/**
 	 * Remove the Yoast SEO columns
+	 * @since  0.3.2
 	 * @param  [type] $columns [description]
 	 * @return [type]          [description]
 	 */
