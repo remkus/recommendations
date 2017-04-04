@@ -80,6 +80,7 @@ class recommendations {
 		add_action( 'admin_menu', array( $this, 'add_meta_box' ) );
 		add_action( 'save_post', array( $this, 'meta_box_save' ), 1, 2 );
 		add_action( 'template_redirect', array( $this, 'count_and_redirect' ) );
+		add_action( 'add_meta_boxes', array( $this, 'remove_yoast_metabox' ) , 11 );
 	}
 
 	/**
@@ -352,6 +353,15 @@ class recommendations {
 			exit;
 		}
 	}
+
+	/**
+	 * Remove Yoast SEO metaboxes
+	 * @return [type] [description]
+	 */
+	public function remove_yoast_metabox() {
+    	remove_meta_box( 'wpseo_meta', 'recommends', 'normal' );
+	}
+
 }
 
 $recommendations = new recommendations;
