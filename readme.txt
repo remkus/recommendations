@@ -5,7 +5,7 @@ Donate link: https://remkusdevries.com/donate/
 Tags: recommendations, recommend, cloak, affiliate, links, out
 Requires at least: 4.2
 Tested up to: 4.7.3
-Stable tag: 0.3.2
+Stable tag: 0.3.3
 
 == Description ==
 
@@ -37,6 +37,9 @@ what I can do.
 No screenshots (yet). Let me know if you need any.
 
 == Changelog ==
+
+= 0.3.3 =
+* Allowing the recommends CPT to be seen by Jetpack and the WordPress.com app.
 
 = 0.3.2 =
 * Remove unneeded Yoast SEO metaboxes and columns
