@@ -11,7 +11,7 @@
  * Plugin Name: Recommendations
  * Plugin URI: http://remkusdevries.com/plugins/recommendations/
  * Description: Complete URL management system that allows you create, manage, and track outbound links from your site via 301 redirects.
- * Version: 0.3.2
+ * Version: 0.3.3
  * Author: Remkus de Vries
  * Author URI: https://remkusdevries.com/
  * License: GPL-2.0+
@@ -82,6 +82,7 @@ class recommendations {
 		add_action( 'template_redirect', array( $this, 'count_and_redirect' ) );
 		add_action( 'add_meta_boxes', array( $this, 'remove_yoast_metabox' ) , 11 );
 		add_filter( 'manage_edit-recommends_columns', array( $this, 'remove_yoast_seo_list_columns' ) );
+		add_filter( 'rest_api_allowed_post_types', array( $this, 'allow_post_type_wpcom' ) );
 	}
 
 	/**
@@ -377,6 +378,18 @@ class recommendations {
 		unset( $columns['wpseo-focuskw'] );
 		return $columns;
 	}  
+
+	/**
+ 	 * Filter the list of Post Types available in the WordPress.com REST API.
+	 *
+	 * @since  0.3.3
+	 * @param array $allowed_post_types Array of whitelisted Post Types.
+	 * @return array $allowed_post_types Array of whitelisted Post Types, including our 'recommends' Custom Post Type.
+	 */
+	public function allow_post_type_wpcom( $allowed_post_types ) {
+		$allowed_post_types[] = 'recommends';
+    	return $allowed_post_types;
+	}
 
 }
 

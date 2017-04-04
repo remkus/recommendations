@@ -33,6 +33,9 @@ No screenshots (yet). Let me know if you need any.
 
 ##Changelog
 
+### 0.3.3
+* Allowing the recommends CPT to be seen by Jetpack and the WordPress.com app.
+
 ### 0.3.2
 * Remove unneeded Yoast SEO metaboxes and columns
 * Fix custom post type columns not displaying
