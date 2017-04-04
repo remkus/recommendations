@@ -76,11 +76,12 @@ class recommendations {
 		add_action( 'init', array( $this, 'register_taxonomy_genre' ) );
 		add_action( 'init', array( $this, 'register_taxonomy_providers' ) );
 		add_action( 'manage_posts_custom_column', array( $this, 'columns_data' ) );
-		add_filter( 'manage_edit-recommendations_columns', array( $this, 'columns_filter' ) );
+		add_filter( 'manage_edit-recommends_columns', array( $this, 'columns_filter' ) );
 		add_action( 'admin_menu', array( $this, 'add_meta_box' ) );
 		add_action( 'save_post', array( $this, 'meta_box_save' ), 1, 2 );
 		add_action( 'template_redirect', array( $this, 'count_and_redirect' ) );
 		add_action( 'add_meta_boxes', array( $this, 'remove_yoast_metabox' ) , 11 );
+		add_filter( 'manage_edit-recommends_columns', array( $this, 'remove_yoast_seo_list_columns' ) );
 	}
 
 	/**
@@ -361,6 +362,19 @@ class recommendations {
 	public function remove_yoast_metabox() {
     	remove_meta_box( 'wpseo_meta', 'recommends', 'normal' );
 	}
+
+	/**
+	 * Remove the Yoast SEO columns
+	 * @param  [type] $columns [description]
+	 * @return [type]          [description]
+	 */
+	public function remove_yoast_seo_list_columns( $columns) {
+		unset( $columns['wpseo-score'] );
+		unset( $columns['wpseo-title'] );
+		unset( $columns['wpseo-metadesc'] );
+		unset( $columns['wpseo-focuskw'] );
+		return $columns;
+	}  
 
 }
 
