@@ -4,8 +4,8 @@ Contributors: DeFries
 Donate link: https://remkusdevries.com/donate/
 Tags: recommendations, recommend, cloak, affiliate, links, out
 Requires at least: 4.2
-Tested up to: 4.4
-Stable tag: 0.3.0
+Tested up to: 4.7.3
+Stable tag: 0.3.1
 
 == Description ==
 
@@ -37,8 +37,9 @@ what I can do.
 No screenshots (yet). Let me know if you need any.
 
 == Changelog ==
----------
+
+= 0.3.1 = 
+* Minor updates
 
 = 0.3.0 =
-
 * Into the light I command thee!
