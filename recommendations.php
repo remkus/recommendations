@@ -383,6 +383,7 @@ class recommendations {
  	 * Filter the list of Post Types available in the WordPress.com REST API.
 	 *
 	 * @since  0.3.3
+	 * @link https://jeremy.hu/manage-custom-post-types-wordpresscom/
 	 * @param array $allowed_post_types Array of whitelisted Post Types.
 	 * @return array $allowed_post_types Array of whitelisted Post Types, including our 'recommends' Custom Post Type.
 	 */
